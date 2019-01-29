@@ -15,6 +15,11 @@ options:
 	@echo "LDFLAGS = $(STLDFLAGS)"
 	@echo "CC      = $(CC)"
 
+colors.h: $(WALCACHE)/colors-wal-st.h
+	cp $< $@
+
+config.h: colors.h
+
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
@@ -27,7 +32,7 @@ st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	rm -f st $(OBJ) colors.h st-$(VERSION).tar.gz
 
 dist: clean
 	mkdir -p st-$(VERSION)
